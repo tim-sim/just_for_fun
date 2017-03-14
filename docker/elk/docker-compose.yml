@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  logstash:
+#    container_name: test_ls
+    build: logstash/
+    ports:
+      - "9600:9600"
+    volumes:
+      - ./logstash/input/:/input/
+      - ./logstash/output/:/output
+    networks:
+      - elk
+  es1:
+#    container_name: test_es_1
+    image: elasticsearch:5.2.1
+    environment:
+      xpack.security.enabled: "false"
+      xpack.monitoring.enabled: "false"
+      xpack.graph.enabled: "false"
+      xpack.watcher.enabled: "false"
+    ports:
+      - "9201:9200"
+    volumes:
+      - ./es/config/es1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - elk
+#  es2:
+#    container_name: test_es_2
+#    image: elasticsearch:5.2.1
+#    ports:
+#      - "9202:9200"
+#    volumes:
+#      - ./es/config/es2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+#  kibana:
+#    container_name: test_kibana
+#    image: kibana:5.2.1
+#    ports:
+#      - "5601:5601"
+#    volumes:
+#      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+networks:
+  elk:
+    driver: bridge

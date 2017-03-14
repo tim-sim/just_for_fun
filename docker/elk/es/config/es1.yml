@@ -1,0 +1,2 @@
+cluster.name: es_cluster
+node.name: es1
