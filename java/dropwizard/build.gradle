@@ -1,0 +1,29 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:20.0'
+    compile 'io.dropwizard:dropwizard-core:1.1.0'
+    compileOnly 'org.projectlombok:lombok:1.16.16'
+
+    testCompile 'junit:junit:4.12'
+}
+
+/*
+jar {
+    manifest {
+        attributes 'Main-Class': 'App'
+    }
+}
+*/
+mainClassName = 'App'
+
