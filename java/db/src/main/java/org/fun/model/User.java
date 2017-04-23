@@ -1,14 +1,19 @@
 package org.fun.model;
 
+import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import org.fun.hibernate.JsonBType;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Map;
 import java.util.UUID;
 
+@TypeDef(name = "jsonb", typeClass = JsonBType.class)
 @Entity
 @Table(name = "users")
 @Getter
@@ -19,15 +24,17 @@ public class User {
     private UUID id = UUID.randomUUID();
     private String login;
     private String password;
-    private String name;
-    private String address;
+    @Type(type = "jsonb")
+    private Map<String, String> name;
+    @Type(type = "jsonb")
+    private Map<String, String> address;
     private String email;
     private boolean active = true;
 
     public User() {
     }
 
-    public User(String login, String password, String name, String address, String email) {
+    public User(String login, String password, Map<String, String> name, Map<String, String> address, String email) {
         this.login = login;
         this.password = password;
         this.name = name;
@@ -42,8 +49,8 @@ public class User {
     public static class UserBuilder {
         private String userName;
         private String password;
-        private String name;
-        private String address;
+        private Map<String, String> name = Maps.newHashMap();
+        private Map<String, String> address = Maps.newHashMap();
         private String email;
 
         UserBuilder() {
@@ -59,13 +66,13 @@ public class User {
             return this;
         }
 
-        public User.UserBuilder name(String name) {
-            this.name = name;
+        public User.UserBuilder nameItem(String key, String value) {
+            this.name.put(key, value);
             return this;
         }
 
-        public User.UserBuilder address(String address) {
-            this.address = address;
+        public User.UserBuilder addressItem(String key, String value) {
+            this.address.put(key, value);
             return this;
         }
 

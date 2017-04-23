@@ -39,13 +39,14 @@ public class App implements CommandLineRunner {
         name.put("last_name", "Nasibullin");
         Map<String, String> address = Maps.newHashMap();
         address.put("city", "SPb");
-        User me = User.builder()
-                .userName("tim")
+        User user = User.builder()
+                .userName("hpotter")
                 .password((bcrypt.encode("tim")))
-                .name(json.writeValueAsString(name))
-                .address(json.writeValueAsString(address))
-                .email("timur.nasibullin@gmail.com")
+                .nameItem("first_name", "Harry")
+                .nameItem("last_name", "Potter")
+                .addressItem("castle", "Hogwarts")
+                .email("harry.potter@gmail.com")
                 .build();
-        userRepository.save(me);
+        userRepository.save(user);
     }
 }
