@@ -1,6 +1,6 @@
-package org.fun.repository;
+package org.fun.data.repository;
 
-import org.fun.model.User;
+import org.fun.data.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**

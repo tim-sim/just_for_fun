@@ -25,7 +25,8 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-jooq'
+    //compile 'org.springframework.boot:spring-boot-starter-security'
 
     compile 'com.google.guava:guava:21.0'
     compile 'org.postgresql:postgresql:42.0.0'
@@ -42,5 +43,5 @@ flyway {
     password = 'pgadmin'
 }
 
-mainClassName = 'App'
+mainClassName = 'org.fun.App'
 
